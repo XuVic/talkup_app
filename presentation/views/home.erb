@@ -1,0 +1,19 @@
+<div class="jumbotron">
+  <h1 class="display-3">Let's Talk!</h1>
+  <p class="lead">
+    This is a temporary demostration for contents of homepage container.
+    The purpose of this web application, TalkUp, is for ISS students to have conversation/discussion easily and comfortably with this anonymous discussion platform.
+  </p>
+
+  <hr class="my-4">
+  <p>
+    Welcome to TalkUp, ISS students! Enjoy your conversations here! :)
+  </p>
+  <p class="lead">
+    <% if @current_account %>
+    <a class="btn btn-primary btn-lg" href="/account/<%= @current_account['username'] %>" role="button">Enter</a>
+    <% else %>
+      <a class="btn btn-primary btn-lg" href="/auth/login" role="button">Get Start</a>
+    <% end %>
+  </p>
+</div>
