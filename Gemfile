@@ -23,6 +23,9 @@ gem 'http'
 gem 'dry-monads'
 gem 'dry-transaction'
 
+#Session Management
+gem 'redis-rack'
+
 group :test do
   gem 'minitest'
   gem 'minitest-rg'

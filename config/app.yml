@@ -6,3 +6,6 @@ development:
 test:
   API_URL: http://localhost:9292/api/v0.1
   # APP_URL: http://localhost:3000
+
+production:
+  API_URL: https://talkup-api.herokuapp.com/
