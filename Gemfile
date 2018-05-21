@@ -6,6 +6,9 @@ gem 'puma'
 gem 'roda'
 gem 'slim'
 
+#Secure Algorithm
+gem 'rbnacl-libsodium'
+
 # Configuration
 gem 'econfig'
 gem 'rake'
