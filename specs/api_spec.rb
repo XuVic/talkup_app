@@ -1,4 +1,4 @@
-require_relative './spec_helper.rb'
+  require_relative './spec_helper.rb'
 
 describe 'Test Api gateway' do
   before do
@@ -27,7 +27,7 @@ describe 'Test Api gateway' do
         response = @gateway.account_info(DATA[:accounts][0]['username'])
         _(response.code).must_equal 200
         _(response.message).must_include 'Vic'
-        _(response.message).must_include 'xumingyo'
+        _(response.message).must_include 'mingyo'
       end
 
       it 'SAD: should be able to return error message when user name not exist' do
@@ -41,9 +41,10 @@ describe 'Test Api gateway' do
       it 'HAPPY: should authenticate account if correct credentials provided' do
         response = @gateway.account_auth(DATA[:accounts][0]['username'],
                                          DATA[:accounts][0]['password'])
+        account_info = JSON.parse response.message
         _(response.code).must_equal 200
         _(response.message).must_include 'Vic'
-        _(response.message).must_include 'xumingyo'
+        _(response.message).must_include 'mingyo'
       end
 
       it 'SAD: should reject account auth if wrong credentials provided' do

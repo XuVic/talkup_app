@@ -7,3 +7,6 @@ require_relative '../init.rb'
 def app
   TalkUp::App
 end
+
+DATA = {}
+DATA[:accounts] = YAML.safe_load File.read('specs/seeds/account_seeds.yml')
