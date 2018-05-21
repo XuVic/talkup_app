@@ -25,11 +25,12 @@ gem 'dry-transaction'
 
 #Session Management
 gem 'redis-rack'
+gem 'rack-test'
 
 group :test do
   gem 'minitest'
   gem 'minitest-rg'
-  gem 'rack-test'
+
   gem 'webmock'
 end
 
