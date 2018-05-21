@@ -12,6 +12,8 @@ module TalkUp
     Econfig.root = '.'
 
     configure :development, :test do
+      require 'rack/test'
+      include Rack::Test::Methods
       # Allows running reload! in pry to restart entire app
       def self.reload!
         exec 'pry -r ./specs/test_load_all'
