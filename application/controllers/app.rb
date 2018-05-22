@@ -16,8 +16,7 @@ module TalkUp
 
 
     route do |routing|
-      @current_account = session[:current_account]
-      @current_account = JSON.parse @current_account.message if @current_account
+      @current_account = SecureSession.new(session).get(:current_account)
 
       routing.assets
       routing.multi_route

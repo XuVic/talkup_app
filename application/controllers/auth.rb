@@ -14,7 +14,7 @@ module TalkUp
           account =  ApiGateway.new.account_auth( routing.params['username'],
                                                   routing.params['password'] )
           #session[:current_account] = account
-          SecureSession.new(session).set(:current_account, account)
+          SecureSession.new(session).set(:current_account, account.message)
           # flash[:notice] = "Welcome to TalkUp, #{login_input['username']}!"
           routing.redirect '/'
         rescue StandardError
