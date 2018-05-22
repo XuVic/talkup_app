@@ -11,14 +11,13 @@ module TalkUp
 
         # POST /auth/login
         routing.post do
-          account =  ApiGateway.new.account_auth( routing.params['username'],
+          result =  ApiGateway.new.account_auth( routing.params['username'],
                                                   routing.params['password'] )
-          #session[:current_account] = account
-          SecureSession.new(session).set(:current_account, account.message)
-          # flash[:notice] = "Welcome to TalkUp, #{login_input['username']}!"
+          SecureSession.new(session).set(:current_account, result.message)
+          
           routing.redirect '/'
-        rescue StandardError
-          # flash[:error] = 'Username and Password did not match our records'
+          rescue StandardError
+          
           routing.redirect '/auth/login'
         end
       end
@@ -26,7 +25,7 @@ module TalkUp
       routing.on 'logout' do
         # GET /auth/logout
         routing.get do
-          session[:current_account] = nil
+          SecureSession.new(session).delete(:current_account)
           routing.redirect '/auth/login'
         end
       end

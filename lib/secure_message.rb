@@ -30,7 +30,7 @@ class SecureMessage
 
     def self.decrypt(ciphertext64)
         return nil unless ciphertext64
-        ciphertext = Base64.urlsafe_decode64(ciphertext)
+        ciphertext = Base64.urlsafe_decode64(ciphertext64)
         simple_box = RbNaCl::SimpleBox.from_secret_key(key)
         message_json = simple_box.decrypt(ciphertext)
         JSON.parse message_json 

@@ -15,3 +15,4 @@ desc 'Run application console(pry)'
 task :console do
   sh 'pry -r ./specs/test_load_all'
 end
+

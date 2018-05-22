@@ -16,15 +16,17 @@ module TalkUp
 
 
     route do |routing|
-      @current_account = SecureSession.new(session).get(:current_account)
-
+      account_info = SecureSession.new(session).get(:current_account)
+      account = build_representer(account_info, AccountRepresenter)
+      @current_account = Views::Account.new(account)
+  
       routing.assets
       routing.multi_route
       ## routing.public
 
       # GET '/'
       routing.root do
-        view 'home', locals: { current_account: @current_account }
+        view 'home', locals: { current_account: @current_account}
       end
 
     end

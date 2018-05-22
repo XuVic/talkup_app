@@ -14,26 +14,16 @@
       </li>
 
       <!-- if login status, navbar shows "Username(Account Detail)" & "Logout" -->
-      <% if @current_account %>
+        <% if @current_account.username != nil%>
+          <li class="nav-item">
+            <a class="nav-link" href="/account/<%= @current_account.username%>" >
+              <%= @current_account.username %>
+            </a>
+          </li>
+        <% end %>
         <li class="nav-item">
-          <a class="nav-link" href="/account/<%= @current_account['username']%>" >
-            <%= @current_account['username'] %>
-          </a>
+          <a class="nav-link" href="/auth/<%= @current_account.action.downcase%>"><%= @current_account.action %></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/logout">Logout</a>
-        </li>
-
-      <!-- if not login status, navbar shows "Login" & "Register" -->
-      <% else %>
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Register</a>
-        </li>
-
-      <% end %>
 
     </ul>
     <!-- <form class="form-inline my-2 my-lg-0">
