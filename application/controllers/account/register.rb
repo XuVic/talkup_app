@@ -6,7 +6,7 @@ module TalkUp
 
             routing.post do 
                 result = Register.new.call(routing.params)
-                location = (result.success?) ? '/auth/login' : '/account/register'
+                location = response_handler(result, ['/account/login', '/account/register'])
                 
                 routing.redirect location
             end

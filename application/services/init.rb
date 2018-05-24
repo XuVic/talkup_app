@@ -1,4 +1,5 @@
+folders = %w[account]
 
-Dir.glob("#{File.dirname(__FILE__)}/*.rb").each do |file|
-  require file
+folders.each do |floder|
+  require_relative "#{floder}/init.rb"
 end

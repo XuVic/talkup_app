@@ -11,14 +11,8 @@ module TalkUp
 
         # POST /auth/login
         routing.post do
-          result =  ApiGateway.new.account_auth( routing.params )
-          
-          if result.code < 300
-            SecureSession.new(session).set(:current_account, result.message)
-            location = '/'
-          else
-            location = '/auth/login'
-          end
+          result =  Account.auth(routing.params)
+          location = response_handler(result, ['/', '/auth/login'])
 
           routing.redirect location
         end

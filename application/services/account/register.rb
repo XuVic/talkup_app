@@ -14,10 +14,8 @@ module TalkUp
                 input.delete('confirmed_pwd')
                 Right(input)
             else
-                Left('Password not matched')
+                Left({:errors => {:account => ['password not matched']}}.to_json)
             end
-            rescue
-                Left('Password not matched')
         end
         def pass_info(input)
             result = ApiGateway.new.account_create(input)
