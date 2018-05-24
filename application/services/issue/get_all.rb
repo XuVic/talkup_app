@@ -2,15 +2,16 @@ require 'dry-monads'
 
 module TalkUp
 
-    module AccountService
+    module IssueService
         extend Dry::Monads::Either::Mixin
 
-        def self.auth(input)
-            result =  ApiGateway.new.account_auth( input )
+        def self.get_all(input)
+            result = ApiGateway.new.issues_info(input)
+
             if result.code < 300
                 Right(result.message)
             else
-                Left(result.message)
+                Left({:errors => {:issue => ['nothing']}}.to_json)
             end
         end
     end

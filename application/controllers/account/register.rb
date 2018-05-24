@@ -5,14 +5,14 @@ module TalkUp
         route('register', 'account') do |routing|
 
             routing.post do 
-                result = Register.new.call(routing.params)
+                result = Register.new.call( routing.params )
                 location = response_handler(result, ['/account/login', '/account/register'])
                 
                 routing.redirect location
             end
             
             routing.get do 
-                view :register
+                view :'account/register'
             end
         end
     end

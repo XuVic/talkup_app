@@ -1,5 +1,5 @@
 module TalkUp
-    module Views
+    module View
 
         class Error
 

@@ -1,5 +1,5 @@
 module TalkUp
-    module Views
+    module View
 
         class Account
             
@@ -22,10 +22,10 @@ module TalkUp
             end
 
             def action
-                if @account == nil
-                    'Login'
-                else
+                if login?
                     'Logout'
+                else
+                    'Login'
                 end
             end
         end

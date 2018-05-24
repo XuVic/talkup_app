@@ -5,10 +5,21 @@ task :api_spec do
   sh 'ruby specs/api_spec.rb'
 end
 
-desc 'Run all tests'
-Rake::TestTask.new(:spec) do |t|
-  t.pattern = 'specs/*_spec.rb'
-  t.warning = false
+namespace :spec do 
+  desc 'Run all tests'
+  task all: %i[spec spec_unit]
+
+  desc 'Run gateway tests'
+  Rake::TestTask.new(:api) do |t|
+    t.pattern = 'specs/api/*_api.rb'
+    t.warning = false
+  end
+
+  desc 'Run unit tests'
+  Rake::TestTask.new(:unit) do |t|
+    t.pattern = 'specs/unit/*_spec.rb'
+    t.warning = false
+  end
 end
 
 desc 'Run application console(pry)'

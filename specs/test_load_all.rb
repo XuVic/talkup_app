@@ -7,5 +7,7 @@ def app
   TalkUp::App
 end
 
-DATA = {}
-DATA[:accounts] = YAML.safe_load File.read('specs/seeds/account_seeds.yml')
+data = {}
+data[:accounts] = YAML.safe_load File.read('specs/seeds/account_seeds.yml')
+data[:issues] = YAML.safe_load File.read('specs/seeds/issue_seeds.yml')
+DATA = JsonRequestBody.parse_sym(data.to_json)

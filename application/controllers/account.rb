@@ -9,7 +9,7 @@ module TalkUp
         # GET /account/[username]
         routing.get String do |username|
           if @current_account.login?
-            view :account, locals: { current_account: @current_account }
+            view :'account/account', locals: { current_account: @current_account }
           else
             routing.redirect '/auth/login'
           end

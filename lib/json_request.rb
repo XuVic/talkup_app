@@ -7,11 +7,16 @@ class JsonRequestBody
     end
 
     def self.recur_sym(hash)
-        hash.each do |k, v|
-            hash[k] = recur_sym(v) if v.class == Hash
+        if hash.class == Array
+            hash.each_with_index do |v, i|
+                hash[i] = recur_sym(v)
+            end
+        elsif hash.class == Hash
+            hash.each do |k, v|
+                hash[k] = recur_sym(v) if v.class == Hash || v.class == Array
+            end
+            Hash[hash.map { |k, v| [k.to_sym, v] }]
         end
-        #hash.symbolize_keys
-        Hash[hash.map { |k, v| [k.to_sym, v] }]
     end
     
 end

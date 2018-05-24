@@ -19,14 +19,14 @@
           integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
           crossorigin="anonymous"></script> -->
 
-  <%= render :top_nav %>
+  <%= render :'layouts/top_nav' %>
   <div class="container" style="padding-top: 5%; ">
-    <%= render :flash_bar %>
+    <%= render :'layouts/flash_bar' %>
     <%= yield %>
   </div>
 
 </body>
 
-<%= render :footer %>
+<%= render :'layouts/footer' %>
 
 </html>

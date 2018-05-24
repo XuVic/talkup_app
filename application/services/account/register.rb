@@ -10,7 +10,7 @@ module TalkUp
         step :pass_info
 
         def password_confirmed(input)
-            if input['password'] == input['confirmed_pwd']
+            if input[:password] == input[:confirmed_pwd]
                 input.delete('confirmed_pwd')
                 Right(input)
             else

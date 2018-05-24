@@ -12,15 +12,16 @@ module TalkUp
 
     require_relative 'auth'
     require_relative 'account'
+    require_relative 'issues'
 
 
 
     route do |routing|
       routing.assets
       account_info = SecureSession.new(session).get(:current_account)
-      account = build_representer(account_info, AccountRepresenter)
-      @current_account = Views::Account.new(account)
-      
+      account = account_info == nil ? account_info : AccountRepresenter.new(OpenStruct.new).from_json(account_info)  
+      @current_account = View::Account.new(account)
+
       routing.multi_route
       ## routing.public
 

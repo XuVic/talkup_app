@@ -35,7 +35,8 @@ module TalkUp
     def initialize(config = TalkUp::App.config)
       @config = config
     end
-
+    
+    #account
     def account_create(account_info_hash)
       call_api(:post, ['accounts'] , account_info_hash)
     end
@@ -47,6 +48,15 @@ module TalkUp
     def account_auth(account_info_hash)
       call_api(:post, ['accounts', 'authenticate'],
                       account_info_hash)
+    end
+
+    #issue
+    def issues_info(section)
+      call_api(:get, ['issues', section], nil)
+    end 
+    
+    def issue_create(issue_data)
+      call_api(:post, ['issue'], issue_data)
     end
 
     def call_api(method, resources, data)

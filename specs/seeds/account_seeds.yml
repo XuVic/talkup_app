@@ -8,3 +8,6 @@
 - username: 'SoumyaRay'
   email: 'soumya@gmail.com'
   password: 'mypassword3'
+- username: ''
+  email: 'soumya@gmail.com'
+  password: 'mypassword3'
