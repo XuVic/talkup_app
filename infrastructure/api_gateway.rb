@@ -44,9 +44,9 @@ module TalkUp
       call_api(:get, ['accounts', username], nil)
     end
 
-    def account_auth(username, password)
+    def account_auth(account_info_hash)
       call_api(:post, ['accounts', 'authenticate'],
-                      { username: username, password: password })
+                      account_info_hash)
     end
 
     def call_api(method, resources, data)

@@ -1,4 +1,4 @@
-<!-- <div class="bs-docs-section">
+<div class="bs-docs-section">
   <div class="row">
     <div class="col-lg-12">
       <div class="page-header">
@@ -10,35 +10,42 @@
   <div class="row">
     <div class="col-lg-6">
       <div class="bs-component">
-        <form>
+        <form action="/account/register" method="post" >
           <fieldset>
             <div class="form-group">
 
-              <label for="exampleInputUserName">User Name</label>
-              <input name="username" class="form-control" id="exampleInputUserName"
+              <label for="UserName">User Name</label>
+              <input tpye='username' name="username" class="form-control" id="UserName"
                      aria-describedby="userNameHelp" placeholder="Enter User Name">
               <small id="userNameHelp" class="form-text text-muted">
                 User name will be used for login.
               </small>
 
-              <label for="exampleInputEmail">Email</label>
-              <input name="email" class="form-control" id="exampleInputEmail"
+              <label for="Email">Email</label>
+              <input type='email' name="email" class="form-control" id="Email"
                      aria-describedby="emailHelp" placeholder="Enter email">
               <small id="emailHelp" class="form-text text-muted">
                 Your email address will not show on your public profile page.
               </small>
 
-              <label for="exampleInputPassword">Password</label>
-              <input name="password" class="form-control" id="exampleInputPassword"
+              <label for="Password">Password</label>
+              <input type='password' name="password" class="form-control" id="Password"
                      aria-describedby="passwordHelp" placeholder="Enter Password">
               <small id="passwordHelp" class="form-text text-muted">
                 Be carefull when typing.
               </small>
 
+              <label for="Confirmed pwd">Confirmed Password</label>
+              <input type="password" name="confirmed_pwd" id="confirmed_pwd" class='form-control'
+                     placeholder='Confirmed Password' aria-describedby='passwordHelp'>
+              <small class='form-text text-muted'> Please confirmed password </small>             
+            </div>
+            <div class='form-group'>
+              <input type="submit" class='btn btn-primary' value='submit'> 
             </div>
           </fieldset>
         </form>
       </div>
     </div>
   </div>
-</div> -->
+</div>

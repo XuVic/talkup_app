@@ -10,7 +10,7 @@
     Welcome to TalkUp, ISS students! Enjoy your conversations here! :)
   </p>
   <p class="lead">
-    <% if @current_account.action == 'Login' %>
+    <% if @current_account.login? %>
       <a class="btn btn-primary btn-lg" href="/account/<%= @current_account.username %>" role="button">Enter</a>
     <% else %>
       <a class="btn btn-primary btn-lg" href="/auth/login" role="button">Get Start</a>

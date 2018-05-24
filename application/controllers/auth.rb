@@ -11,14 +11,16 @@ module TalkUp
 
         # POST /auth/login
         routing.post do
-          result =  ApiGateway.new.account_auth( routing.params['username'],
-                                                  routing.params['password'] )
-          SecureSession.new(session).set(:current_account, result.message)
+          result =  ApiGateway.new.account_auth( routing.params )
           
-          routing.redirect '/'
-          rescue StandardError
-          
-          routing.redirect '/auth/login'
+          if result.code < 300
+            SecureSession.new(session).set(:current_account, result.message)
+            location = '/'
+          else
+            location = '/auth/login'
+          end
+
+          routing.redirect location
         end
       end
 
@@ -26,7 +28,7 @@ module TalkUp
         # GET /auth/logout
         routing.get do
           SecureSession.new(session).delete(:current_account)
-          routing.redirect '/auth/login'
+          routing.redirect '/'
         end
       end
     end

@@ -17,6 +17,10 @@ module TalkUp
                 @account.email
             end
 
+            def login?
+                return (@account == nil) ? false : true
+            end
+
             def action
                 if @account == nil
                     'Login'
