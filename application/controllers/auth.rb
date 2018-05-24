@@ -13,7 +13,7 @@ module TalkUp
         routing.post do
           result =  AccountService.auth(routing.params)
           SecureSession.new(session).set(:current_account, result.value)
-          location = response_handler(result, ['/', '/auth/login'])
+          location = result.success? ? '/' : '/auth/login'
 
           routing.redirect location
         end
