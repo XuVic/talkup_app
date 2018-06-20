@@ -1,0 +1,36 @@
+
+<% if !locals[:account_page] %>
+<div class="row">
+  <div class="col">
+    <h1>Section <%= issues.section_name %></h1>
+  </div>
+  <% if @current_account.login? %>
+  <div class="col">
+      <input type="button" class='btn btn-info' value='Create Issue' onclick="location.href='<%= "/issue/create/#{issues.section}" %>';" >
+    </div>
+  <% end %>
+</div>
+<% end %>
+<div class="row">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if !issues.empty? %>
+    <% issues.each_issues.each do |issue|%>
+      <tr>
+          <td>
+              <%= issue.title %>
+              <% if issue.can_view? %>
+              <input type="button" class='btn btn-info' value='enter' onclick="location.href='<%= issue.link(:show) %>';" >
+              <% end %>
+          </td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+</div>

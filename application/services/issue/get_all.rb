@@ -6,7 +6,7 @@ module TalkUp
         extend Dry::Monads::Either::Mixin
 
         def self.get_all(input)
-            result = ApiGateway.new.issues_info(input)
+            result = ApiGateway.new.issues_info(input[:section], input[:token])
 
             if result.code < 300
                 Right(result.message)

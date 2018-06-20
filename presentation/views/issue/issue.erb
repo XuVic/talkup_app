@@ -1,16 +1,66 @@
-<table class="table">
-  <thead>
+<script>
+  top.glob = " <%= issue.id %> "
+</script>
+
+<div class="row">
+  <div class="col">
+    <table class="table">
+    <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Owner</th>
+      <th scope='col'>Action</th>
     </tr>
-  </thead>
-  <tbody>
-    <% issues.each_issues.each do |issue| %>
-      <th scope="row">1</th>
+    </thead>
+    <tbody>
+    <tr>
       <td><%= issue.title %></td>
-    <% end %>
-  </tbody>
-</table>
+      <td><%= issue.description %></td>
+      <td><%= issue.owner %></td>
+      <td>
+      <% if issue.can_edit? %>
+        <input type="button" class='btn btn-info' value='edit' onclick="location.href='<%= issue.link(:edit) %>';" > 
+      <% end %>
+      <% if issue.can_delete? %>
+   <input type="button" class='btn btn-primary' value='delete' onclick="location.href='<%= issue.link(:delete) %>';" > 
+      <% end %>
+      </td>
+    </tr>
+    </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <div class="row">
+      <form class=form-inline>
+      <div class="form-group mb-2">
+        <label for="">Comment：</label>
+        <input type="text" class="form-control" id='comment_info'>
+      </div>
+      <div class="form-group mx-sm-3 mb-2">
+        <input type="button" value="submit" class="btn btn-success" id="comment">
+        <input type="button" value="clear" class="btn btn-primary" id="clear">
+      </div>
+    </div>
+    <div class="row">
+      <ul class='list-group' id='comments'>
+      <% issue.comments.each do |comment| %>
+        <li class='list-group-item' style=" width: 500px" id='<%= comment.id %>' >
+          <div class="col-5">
+            <p><%= comment.content %></p>
+          </div>
+          <div class="col">
+            <% if comment.can_edit? %>
+              <input type="button" value='Edit' class='btn btn-primary comment_edit'>
+            <% end %>
+            <% if comment.can_delete? %>
+              <input type="button" value='Delete' class='btn btn-primary comment_delete'>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+   </form>
+  </div>
+</div>

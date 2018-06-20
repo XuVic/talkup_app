@@ -9,7 +9,11 @@ module TalkUp
         # GET /account/[username]
         routing.get String do |username|
           if @current_account.login?
-            view :'account/account', locals: { current_account: @current_account }
+            input = {section: nil, token: @current_account.token}
+            result = IssueService.get_all(input)
+            issues = TalkUp::IssuesRepresenter.new(OpenStruct.new).from_json result.value
+            issues = TalkUp::View::Issues.new(issues, nil)
+            view :'account/account', locals: { current_account: @current_account, issues: issues }
           else
             routing.redirect '/auth/login'
           end

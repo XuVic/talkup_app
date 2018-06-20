@@ -1,0 +1,5 @@
+<% if issue %>
+    <%= render :'issue/edit_form', locals: {issue: issue, collaborators: collaborators, section: section} %>
+<% else %>
+    <%= render :'issue/issue_form', locals: {collaborators: collaborators, section: section} %>
+<% end  %>

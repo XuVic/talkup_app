@@ -10,20 +10,60 @@ describe 'Test Api Gateway' do
         describe 'Issue Creation' do 
 
             it 'HAPPY: should be able to create issue' do 
-                issue_data = {:username => 'Vic', :issue_data => DATA[:issues][1]}
-                response = @gateway.issue_create(issue_data)
+                
+                issue_data = {:issue_data => DATA[:issues][1]}
+                issue_data[:collaborators] = ['Shelly']
+                response = @gateway.issue_create(issue_data, DATA[:accounts][0][:token])
 
                 _(response.code).must_equal 201
             end
 
         end
+        
+        describe 'Issues Update' do 
+
+            it 'HAPPY: should be able to update a issue' do
+                issues = JSON.parse(@gateway.issues_info(1, DATA[:accounts][0][:token]).message)
+                issue_id = issues['issues'][0]['id']
+
+                response = @gateway.issue_update(issue_id, DATA[:issues][1], DATA[:accounts][0][:token])
+
+                _(response.code).must_equal 200 
+            end
+        end
 
         describe 'Issues Details' do 
 
-            it 'HAPPY: should be able to get all issues' do 
-                response = @gateway.issues_info(2)
+            it 'HAPPY: should be able to get all issues' do
+                response = @gateway.issues_info(1, DATA[:accounts][0][:token])
 
                 _(response.code).must_equal 200 
+            end
+            it 'HAPPY: should be able to get all issues with account' do
+                response = @gateway.issues_info(nil, DATA[:accounts][0][:token])
+
+                _(response.code).must_equal 200 
+            end
+        end
+
+        describe 'Issue Detail' do
+            it 'HAPPY: should be able to get detail of issue' do
+                issues = JSON.parse(@gateway.issues_info(1, DATA[:accounts][0][:token]).message)
+                issue_id = issues['issues'][0]['id']
+
+                response = @gateway.issue_info(issue_id, DATA[:accounts][0][:token])
+
+                _(response.code).must_equal 200
+            end
+        end
+
+        describe 'Issue Delete' do 
+            it 'HAPPY: should be able to delete issue' do 
+                issues = JSON.parse(@gateway.issues_info(1, DATA[:accounts][0][:token]).message)
+                issue_id = issues['issues'][0]['id']
+                response = @gateway.issue_delete(issue_id, DATA[:accounts][0][:token])
+
+                _(response.code).must_equal 200
             end
         end
     end

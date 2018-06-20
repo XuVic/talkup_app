@@ -13,7 +13,9 @@
         <form action="/account/register" method="post" >
           <fieldset>
             <div class="form-group">
-
+              <% if account.email_verificated? %>
+                <%= render :'account/register_confirm', locals: {account: account} %>
+              <% else %>
               <label for="UserName">User Name</label>
               <input tpye='username' name="username" class="form-control" id="UserName"
                      aria-describedby="userNameHelp" placeholder="Enter User Name">
@@ -27,18 +29,7 @@
               <small id="emailHelp" class="form-text text-muted">
                 Your email address will not show on your public profile page.
               </small>
-
-              <label for="Password">Password</label>
-              <input type='password' name="password" class="form-control" id="Password"
-                     aria-describedby="passwordHelp" placeholder="Enter Password">
-              <small id="passwordHelp" class="form-text text-muted">
-                Be carefull when typing.
-              </small>
-
-              <label for="Confirmed pwd">Confirmed Password</label>
-              <input type="password" name="confirmed_pwd" id="confirmed_pwd" class='form-control'
-                     placeholder='Confirmed Password' aria-describedby='passwordHelp'>
-              <small class='form-text text-muted'> Please confirmed password </small>             
+              <% end %>
             </div>
             <div class='form-group'>
               <input type="submit" class='btn btn-primary' value='submit'> 

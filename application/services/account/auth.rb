@@ -1,17 +1,34 @@
 require 'dry-monads'
+require 'dry-transaction'
 
 module TalkUp
 
-    module AccountService
-        extend Dry::Monads::Either::Mixin
+    class AuthCredentials
+        include Dry::Transaction
 
-        def self.auth(input)
-            result =  ApiGateway.new.account_auth( input )
+        step :form_validation
+        step :auth_account
+
+        def form_validation(input)
+            credentials = Form::LoginCredentials.call(input)
+            if credentials.success?
+                Right(input)
+            else
+                error = credentials.errors.map do |k,v|
+                    "#{k} #{v.join(',')}"
+                end.join(', ')
+                Left(error)
+            end
+        end
+
+        def auth_account(input)
+            result =  ApiGateway.new.account_auth(input)
             if result.code < 300
                 Right(result.message)
             else
-                Left(result.message)
+                Left("Invalid Credentials.")
             end
         end
+
     end
 end

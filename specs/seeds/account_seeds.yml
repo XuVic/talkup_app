@@ -2,6 +2,7 @@
 - username: 'Vic'
   email: 'mingyo@email.com'
   password: 'mypassword'
+  token: "BeX0MuKULbr4mk6AwZzyZ2FDMwiKxm4JsB5bGSE7nEddV3QhWSqjMr0MEMM_XK_7-ctcoJLbBo0MQ6soxqf1_Ggn3w9ZUPKb8v4="
 - username: 'Shelly'
   email: 'shelly@email.com'
   password: 'mypassword2'

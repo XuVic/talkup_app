@@ -3,8 +3,12 @@ module TalkUp
 
         class Account
             
-            def initialize(account_info)
+            def initialize(account_info=nil)
                 @account = account_info
+            end
+
+            def token
+                @account.token
             end
 
             def username
@@ -15,6 +19,10 @@ module TalkUp
             def email
                 return nil if @account == nil
                 @account.email
+            end
+
+            def email_verificated?
+                !username.nil?
             end
 
             def login?

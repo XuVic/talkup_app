@@ -4,16 +4,32 @@ module TalkUp
 
         route('register', 'account') do |routing|
 
+            routing.get(String) do |registeration_token|
+                account_info = SecureMessage.decrypt(registeration_token)
+                account = View::Account.new( AccountRepresenter.new(OpenStruct.new).from_json account_info )
+                view :'account/register', locals: { account: account }
+            end
+
             routing.post do 
-                result = Register.new.call( routing.params )
-                location = result.success? ? '/auth/login' : '/account/register'
+                routing.params[:config] = App.config
                 
-                routing.redirect location
+                result = Register.new.call( routing.params )
+                if result.success?
+                    flash[:notice] = result.value
+                    routing.redirect '/auth/login'
+                else
+                    flash[:error] = result.value
+                    routing.redirect
+                end
+
             end
             
             routing.get do 
-                view :'account/register'
+                account = View::Account.new
+                view :'account/register', locals: {account: account}
             end
+
+
         end
     end
 end

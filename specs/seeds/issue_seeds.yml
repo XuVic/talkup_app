@@ -1,5 +1,6 @@
 ---
 - 
+  id: "60a33a65-4f51-402e-bd11-0f5b0fd398dd"
   title: 'issue one'
   description: 'testing'
   section: 2
@@ -8,3 +9,5 @@
   description: 'testing'
   process: 2
   section: 1
+  deadline: '2014-02-09'
+  anonymous: 1

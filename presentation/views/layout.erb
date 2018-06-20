@@ -7,13 +7,14 @@
   <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/minty/bootstrap.min.css"
         rel="stylesheet" integrity="sha384-4eGtnTOp6je5m6l1Zcp2WUGR9Y7kJZuAiD3Pk2GAW3uNRgHQSIqcrcAxBipzlbWP"
         crossorigin="anonymous">
+  <%= assets(:css) %>
 
 </head>
 <body>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
           integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-          crossorigin="anonymous"></script>
+          crossorigin="anonymous"></script> 
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
           integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -24,7 +25,7 @@
     <%= render :'layouts/flash_bar' %>
     <%= yield %>
   </div>
-
+  <%= assets(:js) %>
 </body>
 
 <%= render :'layouts/footer' %>

@@ -1,11 +1,16 @@
 ---
 development:
-  API_URL: http://localhost:9292/api/v0.1
-  # APP_URL: http://localhost:3000
+  API_URL: http://localhost:8080/api/v0.1
+  APP_URL: http://localhost:3000
+  GH_SCOPE: 'read:user'
+  GH_OAUTH_URL:   https://github.com/login/oauth/authorize
+  GH_TOKEN_URL:   https://github.com/login/oauth/access_token
 
 test:
-  API_URL: http://localhost:9292/api/v0.1
-  # APP_URL: http://localhost:3000
+  API_URL: http://localhost:8080/api/v0.1
+  APP_URL: http://localhost:3000
+  GH_OAUTH_URL:   https://github.com/login/oauth/authorize
+  GH_TOKEN_URL:   https://github.com/login/oauth/access_token
 
 production:
   API_URL: https://talkup-api.herokuapp.com/

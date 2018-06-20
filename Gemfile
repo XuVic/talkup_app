@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://ruby.taobao.org/'
 ruby '2.5.1'
 
 # Web
@@ -17,6 +17,7 @@ gem 'rake'
 gem 'pry'
 
 # Security
+gem 'dry-validation'  
 gem 'rack-ssl-enforcer'
 
 #Services

@@ -8,12 +8,10 @@ module TalkUp
         collection :issues, extend: IssueRepresenter , class: OpenStruct do 
             property :id
             property :title
-            #property :description
             property :deadline
             property :process
             property :section
-
-            property :owner, extend: AccountRepresenter, class: OpenStruct
+            property :can_view
         end
     end
 end
