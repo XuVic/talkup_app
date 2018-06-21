@@ -26,7 +26,11 @@ $('#comment').click(function(){
             action = action.concat(' <span class="commenter">'+ comment.commenter.username +'</span>')
         }
         action = action.concat('</div>')
-        comment_element = comment_element.concat(action, '</li>')
+        feedback_element = '<div class="col feedback_list"> <div class="span_group"> <span class="badge badge-primary btn" id="' + comment.id+ '_like">0</span> '
+        feedback_element = feedback_element.concat('<span class="badge badge-danger btn" id="' + comment.id + '_confusing">0</span>')
+        feedback_element = feedback_element.concat('<span class="badge badge-dark btn" id="' + comment.id + '_dislike">0</span>')
+        feedback_element = feedback_element.concat('<span class="badge badge-info btn" id="' + comment.id + '_interesting">0</span></div></div>')
+        comment_element = comment_element.concat(feedback_element,action, '</li>')
         console.log(comment_element)
         $("#comments").append(comment_element)
 
