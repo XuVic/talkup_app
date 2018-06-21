@@ -26,7 +26,12 @@ module TalkUp
 
             def can_delete?
                 @comment.policy.can_delete
+            end 
+
+            def can_feedback?
+                @comment.policy.can_feedback
             end
+
 
             def feedbacks
                 {   like: @comment.feedbacks.select{|f| f.description == 'like'}.length,
@@ -35,6 +40,7 @@ module TalkUp
                     interesting: @comment.feedbacks.select{|f| f.description == 'interesting'}.length
                 }
             end
+
 
         end
     end

@@ -120,7 +120,7 @@
             <% end %>
           </div>
           <div class="col feedback_list">
-          <% if issue.can_comment?   %>
+          <% if issue.can_comment? && comment.can_feedback?   %>
             <div class="btn-group mr-2">
               <span class='badge badge-primary btn btn-feedback'><%= issue.feedback_description[0] %></span>
               <span class='badge badge-danger btn btn-feedback'><%= issue.feedback_description[1] %></span>
