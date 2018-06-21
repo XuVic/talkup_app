@@ -22,7 +22,8 @@ module TalkUp
         end
 
         def auth_account(input)
-            result =  ApiGateway.new.account_auth(input)
+            signed_auth = SecureMessage.sign(input)
+            result =  ApiGateway.new.account_auth(signed_auth)
             if result.code < 300
                 Right(result.message)
             else

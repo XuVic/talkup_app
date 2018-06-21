@@ -1,6 +1,8 @@
-console.log("test")
+console.log("test2")
 issue_id = top.glob.replace(/\s+/g, "")
 console.log(issue_id)
+var anonymous = $("#anonymous").html()
+var can_remove = $("#can_remove").html()
 
 $('#comment').click(function(){
     comment_info = $("#comment_info").val()
@@ -18,6 +20,10 @@ $('#comment').click(function(){
         }
         if(comment.policy.can_delete == true) {
             action = action.concat('<input type="button" value="Delete" class="btn btn-primary comment_delete">')
+        }
+        if(anonymous == 'false') {
+            console.log('anonymous false')
+            action = action.concat(' <span class="commenter">'+ comment.commenter.username +'</span>')
         }
         action = action.concat('</div>')
         comment_element = comment_element.concat(action, '</li>')
@@ -88,3 +94,54 @@ $(".comment_edit").click(function () {
 
 });
 
+$(document).on('click', '#add_collaboraotrs', function () {
+    console.log('add_collaborators')
+    collaborators = $("#collaborators_username").val()
+    console.log(collaborators)
+    var username = collaborators.split(",")
+    console.log(username)
+    data = {
+        issue_id: issue_id,
+        collaborators: {
+            collaborators: username
+        }
+    }
+    console.log(data)
+    $.post('/issue/collaborators', data, function (result) {
+        console.log(result);
+        collaborators = JSON.parse(result).collaborators
+        if (collaborators == null) {
+            alert('collaborator username error!')
+        }
+        else{
+                   for (i = 0; i < collaborators.length; i++) {
+                       console.log(collaborators[i].username)
+                       var collaborator_element = '<li id="' + collaborators[i].username + '" class="list-group-item"><span>' + collaborators[i].username + '</span>'
+                       var action = ''
+                       if (can_remove == 'true') {
+                           action = '<input type="button" value="remove" class="btn btn-primary remove_collaborators">'
+                       }
+                       collaborator_element = collaborator_element.concat(action + '</li>')
+                       $("#collaborators_list").append(collaborator_element)
+                   }
+        }
+
+    });
+       $("#collaborators_username").val("")
+});
+
+
+$(document).on('click', '.remove_collaborators', function () {
+    console.log('remove_collaborators')
+    var collaborator = $(this).parent().children().html()
+    console.log(collaborator)
+    data = {
+        issue_id: issue_id,
+        collaborator: collaborator
+    }
+    $.post('/issue/collaborators/delete', data, function (result) {
+        console.log(result);
+        collaborator = JSON.parse(result)
+        $("#" + collaborator.username).remove();
+    });
+});

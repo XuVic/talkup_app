@@ -16,6 +16,10 @@ module TalkUp
                 @comment.content
             end
 
+            def commenter
+                @comment.commenter.username
+            end
+
             def can_edit?
                 @comment.policy.can_edit
             end

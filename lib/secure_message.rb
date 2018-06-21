@@ -12,6 +12,19 @@ class SecureMessage
         encoded_random_bytes(RbNaCl::SecretBox.key_bytes)
     end
 
+    def self.signing_key
+        @signing_key ||= Base64.strict_decode64(@config.SIGNING_KEY)
+    end
+
+    def self.sign(object)
+        message = object.to_json
+        signer = RbNaCl::SigningKey.new(signing_key)
+        signature_raw = signer.sign(message)
+
+        { data: message,
+          signature: Base64.strict_encode64(signature_raw)}
+    end
+
     def self.setup(config)
         @config = config
     end

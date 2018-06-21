@@ -82,7 +82,15 @@ module TalkUp
 
     def issue_delete(issue_id, token)
       call_api(:delete, ['issue', issue_id], nil, token)
-    end 
+    end
+
+    def add_collaborators(issue_id ,collaborator_data, token)
+      call_api(:post, ['issue', issue_id, 'collaborators'], collaborator_data, token)
+    end
+
+    def remove_collaborator(issue_id, collaborator_data, token)
+      call_api(:delete, ['issue', issue_id, 'collaborators'], collaborator_data, token)
+    end
 
     #comment
     def comment_create(comment_data, token)

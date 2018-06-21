@@ -13,6 +13,9 @@ module TalkUp
             routing.on 'delete' do 
                 routing.route('delete', 'issue')
             end
+            routing.on 'collaborators' do 
+                routing.route('collaborators', 'issue')
+            end
 
             routing.get String do |issue_id| 
                 result = IssueService.get_by_id({:issue_id => issue_id, :token => @current_account.token})

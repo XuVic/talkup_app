@@ -5,11 +5,8 @@ module TalkUp
         route('create', 'issue') do |routing|
             
             routing.get String  do |section| 
-                result = TalkUp::AccountService.collaborators(@current_account.token)
-                collaborators_info = TalkUp::CollaboratorsRepresenter.new(OpenStruct.new).from_json result.value
-                collaborators = TalkUp::View::Collaborators.new(collaborators_info)
 
-                view :'issue/create', locals: {issue: false, collaborators: collaborators, section: section}
+                view :'issue/create', locals: {issue: false, section: section}
             end
 
             routing.post do

@@ -23,21 +23,5 @@
     <input type="submit" class='btn btn-primary' value='create'>
   </div>
 </div>
-<div class="col">
 
-<div class="form-group">
-    <h2>collaborators</h2>
-
-      <% collaborators.username.each do |collaborator_username| %>
-      <div class="form-check">
-          <input name='collaborators[]' class="form-check-input" type="checkbox" value="<%= collaborator_username %>" id="defaultCheck1">
-          <label class="form-check-label" for="defaultCheck1">
-            <%= collaborator_username %>
-          </label>
-      </div>
-      <% end %>
-</div>
-</div>
-
-  </div>
 </form>

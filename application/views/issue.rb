@@ -46,6 +46,10 @@ module TalkUp
                 @issue.comments.map {|comment| Comment.new(comment) }
             end
 
+            def collaborators
+                @issue.collaborators.map {|collaborator| Account.new(collaborator)}
+            end
+
             def link(action)
                 LINK[action] + id
             end

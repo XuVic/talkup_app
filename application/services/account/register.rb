@@ -31,7 +31,8 @@ module TalkUp
             if input[:password].nil?
                 registeration_token = SecureMessage.encrypt(input.to_json)
                 input[:verification_url] = "#{config.APP_URL}/account/register/#{registeration_token}"
-                result = ApiGateway.new.account_create(input)
+                signed_registration = SecureMessage.sign(input)
+                result = ApiGateway.new.account_create(signed_registration)
                 Left("Please verify email with #{input[:email]}" )
             else
                 input.delete(:verification_url)
@@ -51,7 +52,8 @@ module TalkUp
             end
         end
         def pass_info(input)
-            result = ApiGateway.new.account_create(input)
+            signed_registration = SecureMessage.sign(input)
+            result = ApiGateway.new.account_create(signed_registration)
             if result.code < 300
                 Right('Account Created')
             else

@@ -2,46 +2,103 @@
   top.glob = " <%= issue.id %> "
 </script>
 
+<div id='anonymous' style='display: none;'><%= issue.can_comment_anonymously? %></div>
 <div class="row">
-  <div class="col">
-    <table class="table">
-    <thead>
-    <tr>
-      <th scope="col">Title</th>
-      <th scope="col">Description</th>
-      <th scope="col">Owner</th>
-      <th scope='col'>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td><%= issue.title %></td>
-      <td><%= issue.description %></td>
-      <td><%= issue.owner %></td>
-      <td>
-      <% if issue.can_edit? %>
-        <input type="button" class='btn btn-info' value='edit' onclick="location.href='<%= issue.link(:edit) %>';" > 
-      <% end %>
-      <% if issue.can_delete? %>
-   <input type="button" class='btn btn-primary' value='delete' onclick="location.href='<%= issue.link(:delete) %>';" > 
-      <% end %>
-      </td>
-    </tr>
-    </tbody>
+  <div class="col-6">
+    <div class="row">
+        <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Owner</th>
+          <th scope="col">Deadline</th>
+          <th scope='col'>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><%= issue.title %></td>
+          <td><%= issue.owner %></td>
+          <td><%= issue.deadline %></td>
+          <td>
+          <div class="btn-group" role='group'>
+              <% if issue.can_edit? %>
+              <input type="button" class='btn btn-info' value='edit' onclick="location.href='<%= issue.link(:edit) %>';" > 
+              <% end %>
+              <% if issue.can_delete? %>
+              <input type="button" class='btn btn-primary' value='delete' onclick="location.href='<%= issue.link(:delete) %>';" > 
+              <% end %>
+          </div>
+          </td>
+        </tr>
+      </tbody>
     </table>
+    </div>
+    <div class="row">
+       <table class='table'>
+        <thead>
+          <tr>
+            <th scope='col'>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td><%= issue.description %></td>
+        </tbody>
+       </table>
+    </div>
+    <div class="row">
+       <table class='table'>
+        <thead>
+          <tr>
+            <th scope='col'>Collaborators</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td> 
+            <% if issue.can_add_collaborators? %>
+                <div class="input-group mb-3">
+                  <input type="text" id='collaborators_username' class="form-control" placeholder="username,username,username" >
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" id='add_collaboraotrs' type="button">Add</button>
+                  </div>
+                </div>
+            <% end %>
+            <div id="can_remove" style='display:none'><%= issue.can_remove_collaborators? %></div>
+            <ul class="list-group list-group-flush" id='collaborators_list'>
+              <% issue.collaborators.each do |collaborator| %>
+                <li class="list-group-item" id="<%=collaborator.username%>">
+                  <span><%= collaborator.username %></span>
+                  <% if issue.can_remove_collaborators? %>
+                      <input type="button" value="remove" class="btn btn-primary remove_collaborators">
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+
+          </td>
+        </tbody>
+       </table>
+    </div>
   </div>
   <div class="col">
+    <fieldset <%= 'disabled' unless issue.can_comment?  %>>
     <div class="row">
-      <form class=form-inline>
+      <form class=form-inline >
       <div class="form-group mb-2">
         <label for="">Comment：</label>
-        <input type="text" class="form-control" id='comment_info'>
+        <% if issue.can_comment_anonymously? %>
+          <input type="text" class="form-control" placeholder='anonymously' id='comment_info'>
+        <% else %>
+          <input type="text" class="form-control" id='comment_info'>
+        <% end %>
       </div>
       <div class="form-group mx-sm-3 mb-2">
         <input type="button" value="submit" class="btn btn-success" id="comment">
         <input type="button" value="clear" class="btn btn-primary" id="clear">
       </div>
+      </form>
     </div>
+    </fieldset>
     <div class="row">
       <ul class='list-group' id='comments'>
       <% issue.comments.each do |comment| %>
@@ -55,6 +112,9 @@
             <% end %>
             <% if comment.can_delete? %>
               <input type="button" value='Delete' class='btn btn-primary comment_delete'>
+            <% end %>
+            <% if !issue.can_comment_anonymously? %>
+                <span class='commenter'> <%= comment.commenter %></span>
             <% end %>
           </div>
         </li>

@@ -24,7 +24,9 @@ module TalkUp
         end
 
         def get_github_account(input)
-            response = ApiGateway.new.sso_auth(input[:access_token])
+            signed_token = SecureMessage.sign(input[:access_token])
+            puts signed_token
+            response = ApiGateway.new.sso_auth(signed_token)
             if response.code < 300
                 Right(response.message)
             else
