@@ -120,15 +120,14 @@
             <% end %>
           </div>
           <div class="col feedback_list">
-          <%# <% if issue.can_comment? && comment.can_feedback?   %>
+          <% if issue.can_comment? && comment.can_feedback?  %>
             <div class="btn-group mr-2">
               <span class='badge badge-primary btn btn-feedback'><%= issue.feedback_description[0] %></span>
               <span class='badge badge-danger btn btn-feedback'><%= issue.feedback_description[1] %></span>
               <span class='badge badge-dark btn btn-feedback'><%= issue.feedback_description[2] %></span>
               <span class='badge badge-info btn btn-feedback'><%= issue.feedback_description[3] %></span>
             </div>
-            <button class='btn'><%= issue.feedback_description[0] %></button>
-          <%# <% end  %>  
+          <% end %>  
             <div class="span_group">
               <span class="badge badge-primary btn" id='<%=comment.id%>_like'><%= comment.feedbacks[:like] %></span>
               <span class="badge badge-danger btn" id='<%=comment.id%>_confusing'><%= comment.feedbacks[:confusing] %></span>
