@@ -22,6 +22,9 @@ module TalkUp
         collection :collaborators, extend: AccountRepresenter, class: OpenStruct do
             property :username
         end
+        collection :feedback_description, extend: FeedbackRepresenter, class: OpenStruct do
+            property :description
+        end
         collection :comments, extend: CommentRepresenter, class: OpenStruct
     end
 end

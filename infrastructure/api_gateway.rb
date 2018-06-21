@@ -105,6 +105,10 @@ module TalkUp
       call_api(:put, ['comment'], comment_data, token)
     end
 
+    def add_feedback(feedback_data, token)
+      call_api(:post, ['comment', 'feedback'], feedback_data, token)
+    end
+
 
     def call_api(method, resources, data, token)
       url_route = [@config.API_URL, resources].flatten.join'/'

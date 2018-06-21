@@ -81,6 +81,7 @@
     </div>
   </div>
   <div class="col">
+    
     <fieldset <%= 'disabled' unless issue.can_comment?  %>>
     <div class="row">
       <form class=form-inline >
@@ -104,6 +105,7 @@
       <% issue.comments.each do |comment| %>
         <li class='list-group-item' style=" width: 500px" id='<%= comment.id %>' >
           <div class="col-5">
+
             <p><%= comment.content %></p>
           </div>
           <div class="col">
@@ -116,6 +118,22 @@
             <% if !issue.can_comment_anonymously? %>
                 <span class='commenter'> <%= comment.commenter %></span>
             <% end %>
+          </div>
+          <div class="col feedback_list">
+          <% if issue.can_comment?   %>
+            <div class="btn-group mr-2">
+              <span class='badge badge-primary btn btn-feedback'><%= issue.feedback_description[0] %></span>
+              <span class='badge badge-danger btn btn-feedback'><%= issue.feedback_description[1] %></span>
+              <span class='badge badge-dark btn btn-feedback'><%= issue.feedback_description[2] %></span>
+              <span class='badge badge-info btn btn-feedback'><%= issue.feedback_description[3] %></span>
+            </div>
+          <% end  %>
+            <div class="span_group">
+              <span class="badge badge-primary btn" id='<%=comment.id%>_like'><%= comment.feedbacks[:like] %></span>
+              <span class="badge badge-danger btn" id='<%=comment.id%>_confusing'><%= comment.feedbacks[:confusing] %></span>
+              <span class="badge badge-dark btn" id='<%=comment.id%>_dislike'><%= comment.feedbacks[:dislike]%></span>
+              <span class="badge badge-info btn" id='<%=comment.id%>_interesting'><%= comment.feedbacks[:interesting]%></span>  
+            </div>
           </div>
         </li>
       <% end %>

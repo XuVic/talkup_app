@@ -145,3 +145,39 @@ $(document).on('click', '.remove_collaborators', function () {
         $("#" + collaborator.username).remove();
     });
 });
+
+
+$(document).on('click', '.remove_collaborators', function () {
+    console.log('remove_collaborators')
+    var collaborator = $(this).parent().children().html()
+    console.log(collaborator)
+    data = {
+        issue_id: issue_id,
+        collaborator: collaborator
+    }
+    $.post('/issue/collaborators/delete', data, function (result) {
+        console.log(result);
+        collaborator = JSON.parse(result)
+        $("#" + collaborator.username).remove();
+    });
+});
+
+$(document).on('click', '.btn-feedback', function () {
+    var feedback = $(this).html()
+    console.log(feedback)
+    var comment_id = $(this).parent().parent().parent().attr('id')
+    console.log(issue_id)
+    var data = {
+        comment_id: comment_id,
+        feedback_data: {description: feedback}
+    }
+    console.log(data)
+    $.post('/comment/feedback', data, function (result) {
+        console.log(result);
+        var feedback_description = JSON.parse(result).description
+        var feedback = $("#" + comment_id + "_" + feedback_description).html()
+        var feedback_no = parseInt(feedback) + 1
+        console.log(String(feedback_no))
+        $("#" + comment_id + "_" + feedback_description).html(String(feedback_no))
+    });
+});

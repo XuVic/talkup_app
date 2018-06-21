@@ -19,6 +19,7 @@ gem 'pry'
 # Security
 gem 'dry-validation'  
 gem 'rack-ssl-enforcer'
+gem 'secure_headers'
 
 #Services
 gem 'dry-monads'

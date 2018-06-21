@@ -12,7 +12,12 @@ module TalkUp
                 routing.route('edit', 'comment')
             end
 
+            routing.on 'feedback' do 
+                routing.route('feedback', 'comment')
+            end
+
             routing.post do
+                puts routing.params
                 result = CommentService.create( routing.params, @current_account.token)
                 issue = TalkUp::CommentRepresenter.new(OpenStruct.new).from_json result.value
                 

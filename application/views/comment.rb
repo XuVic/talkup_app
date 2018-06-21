@@ -28,6 +28,14 @@ module TalkUp
                 @comment.policy.can_delete
             end
 
+            def feedbacks
+                {   like: @comment.feedbacks.select{|f| f.description == 'like'}.length,
+                    confusing: @comment.feedbacks.select{|f| f.description == 'confusing'}.length,
+                    dislike: @comment.feedbacks.select{|f| f.description == 'dislike'}.length,
+                    interesting: @comment.feedbacks.select{|f| f.description == 'interesting'}.length
+                }
+            end
+
         end
     end
 end

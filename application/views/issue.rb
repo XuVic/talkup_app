@@ -42,6 +42,10 @@ module TalkUp
                 @issue.owner.username
             end
 
+            def feedback_description
+                @issue.feedback_description.map {|f| f.description}
+            end
+
             def comments
                 @issue.comments.map {|comment| Comment.new(comment) }
             end

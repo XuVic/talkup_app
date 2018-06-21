@@ -37,4 +37,17 @@ describe 'Test Api Gateway' do
             _(response.code).must_equal 200
         end
     end
+
+    describe 'Test Feedback' do 
+
+        it 'HAPPY: it should be able to create feedback' do 
+            data = {comment_data: {content: 'test', anonymous: 1}, issue_id: @issue_id}
+            response = @gateway.comment_create(data, DATA[:accounts][0][:token])
+            result = JSON.parse response.message
+            feedback_data = {comment_id: result['id'], feedback_data:{description:'like'}}
+            response = @gateway.add_feedback(feedback_data, DATA[:accounts][0][:token])
+
+            _(response.code).must_equal 201
+        end
+    end
 end
