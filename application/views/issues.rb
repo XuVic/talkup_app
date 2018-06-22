@@ -24,9 +24,9 @@ module TalkUp
 
             def section_name
                 if section == '1'
-                    return 'A'
+                    return 'Issues'
                 else
-                    return 'B'
+                    return 'Activities'
                 end
             end
             

@@ -2,7 +2,7 @@
 <div class="row">
 <div class="col">
 <div class="form-group" >
-  <h2>Issue Information <%= section %> </h2>
+  <h2><%= section == '1' ? 'Issue' : 'Activity' %> Information  </h2>
     <label for="formGroupExampleInput">Title</label>
     <input type="text" name='title' class="form-control" id="formGroupExampleInput" placeholder="Issue Title">
   </div>

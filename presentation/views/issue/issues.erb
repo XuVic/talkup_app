@@ -2,7 +2,7 @@
 <% if !locals[:account_page] %>
 <div class="row">
   <div class="col">
-    <h1>Section <%= issues.section_name %></h1>
+    <h1><%= issues.section_name %> Section</h1>
   </div>
   <% if @current_account.login? %>
   <div class="col">
@@ -25,7 +25,7 @@
           <td>
               <%= issue.title %>
               <% if issue.can_view? %>
-              <input type="button" class='btn btn-info' value='enter' onclick="location.href='<%= issue.link(:show) %>';" >
+              <input type="button" class='btn btn-info issue_enter' value='enter' onclick="location.href='<%= issue.link(:show) %>';" >
               <% end %>
           </td>
       </tr>
