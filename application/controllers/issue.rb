@@ -21,7 +21,6 @@ module TalkUp
                 result = IssueService.get_by_id({:issue_id => issue_id, :token => @current_account.token})
                 issue = TalkUp::IssueRepresenter.new(OpenStruct.new).from_json result.value
                 issue = TalkUp::View::Issue.new(issue)
-                puts result.value
                 view :'issue/issue', locals: {issue: issue}
             end
 
